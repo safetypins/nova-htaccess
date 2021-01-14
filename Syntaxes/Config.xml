@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<syntax name="htaccess">
+    <meta>
+        <name>HTAccess</name>
+        <type>structured</type>
+        <preferred-file-extension>htaccess</preferred-file-extension>
+    </meta>
+
+    <detectors>
+        <extension priority="1.0">htaccess</extension>
+    </detectors>
+
+    <comments>
+        <single>
+            <expression>#</expression>
+        </single>
+    </comments>
+
+    <surrounding-pairs>
+        <pair open="&apos;" close="&apos;" />
+        <pair open="&quot;" close="&quot;" />
+    </surrounding-pairs>
+
+    <scopes>
+        <!-- Pairs -->
+        <scope name="htaccess.pair">
+            <starts-with>
+                <expression>^\s*([a-zA-Z0-9_.-]+)\s*(=| )</expression>
+                <capture number="1" name="htaccess.pair.identifier.key" />
+                <capture number="2" name="htaccess.pair.operator.equals" />
+            </starts-with>
+            <ends-with>
+                <expression>$</expression>
+            </ends-with>
+            <subscopes>
+                <include syntax="self" collection="values" />
+            </subscopes>
+        </scope>
+
+        <!-- Comments -->
+        <scope name="htaccess.comment.single" spell-check="true">
+            <expression>\#.*$</expression>
+        </scope>
+    </scopes>
+
+    <collections>
+        <!-- Values -->
+        <collection name="values">
+            <include syntax="self" collection="strings" />
+            <scope name="htaccess.value.boolean">
+                <strings>
+                    <string>true</string>
+                    <string>false</string>
+                </strings>
+            </scope>
+            <scope name="htaccess.value.number">
+                <expression>\b(\-|\+)?(?:\d+(?:\.\d*)?|(?:\.\d+))\b</expression>
+            </scope>
+        </collection>
+
+        <!-- Strings -->
+        <collection name="strings">
+            <scope name="htaccess.string.double-quoted">
+                <expression>&quot;(?:[^&quot;\\]|\\.)*(?:&quot;|$)</expression>
+            </scope>
+            <scope name="htaccess.string.single-quoted">
+                <expression>&apos;(?:[^&apos;\\]|\\.)*(?:&apos;|$)</expression>
+            </scope>
+        </collection>
+    </collections>
+</syntax>

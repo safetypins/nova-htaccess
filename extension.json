@@ -1,0 +1,14 @@
+{
+      "identifier": "mattcowgur.HTAccess",
+      "name": "HTAccess",
+      "vendor": "Matt Cowgur",
+      "description": "Syntax highlighter for .htaccess files.",
+      "version": ".0.1",
+      "categories": ["languages"],
+      "repository": "https://github.com/safetypins/nova-htaccess",
+      "license": "MIT",
+      "bugs": {
+        "url": "https://github.com/safetypins/nova-htaccess/issues"
+      }
+    }
+    
